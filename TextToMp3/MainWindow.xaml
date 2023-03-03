@@ -1,0 +1,199 @@
+﻿<Window x:Class="TextToMp3.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TextToMp3"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="930" Width="700"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+     TextElement.Foreground="{DynamicResource MaterialDesignBody}"
+     TextElement.FontWeight="Regular"
+     TextElement.FontSize="13"
+     TextOptions.TextFormattingMode="Ideal"
+     TextOptions.TextRenderingMode="Auto"
+     Background="{DynamicResource MaterialDesignPaper}"
+     FontFamily="{DynamicResource MaterialDesignFont}" WindowStartupLocation="CenterScreen" ResizeMode="NoResize" WindowStyle="None"
+        >
+    <Grid>
+        <StackPanel>
+            <Grid Height="40" Background="#FF9C27B0" MouseDown="OnMouseDown_TitleBar">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="White" Grid.Column="1" Width="52"
+                                Click="BtnSave_Click"
+                                >
+                        <materialDesign:PackIcon Kind="ContentSave"  Width="20" Height="22"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="White" Grid.Column="1" Width="52"
+                                Click="BtnMinimize_Click"
+                                >
+                        <materialDesign:PackIcon Kind="WindowMinimize"  Width="20" Height="22"/>
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                Foreground="White" Grid.Column="1" Width="52"
+                                Click="BtnCloseApp_Click"
+                                >
+                        <materialDesign:PackIcon Kind="Close"  Width="20" Height="25"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="30 30 30 0">
+                <StackPanel>
+                    <materialDesign:Card Padding="10">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox FontSize="17" IsReadOnly="True" materialDesign:HintAssist.Hint="설정파일 경로" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="560"
+                                     Text="{Binding Path=settingPath, UpdateSourceTrigger=LostFocus, Mode=OneWay}"
+                                     TextChanged="TextBoxSettingPath_TextChanged"
+                                     >
+                            </TextBox>
+                            <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    Foreground="#2D3030" Grid.Column="1" Width="60"
+                                    Click="BtnSettingPath_Click"
+                                    >
+                                <materialDesign:PackIcon Kind="DotsHorizontal"  Width="25" Height="25"/>
+                            </Button>
+                        </StackPanel>
+                    </materialDesign:Card>
+                    <Rectangle Margin="0 10 0 -10"  Fill="#FF9C27B0"  Height="5"/>
+                </StackPanel>
+            </Grid>
+            <Grid Margin="30 30 30 0">
+                <materialDesign:Card Padding="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox FontSize="17" IsReadOnly="True" materialDesign:HintAssist.Hint="서비스 계정키" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="560"
+                                 Text="{Binding Path=servicePath, UpdateSourceTrigger=LostFocus, Mode=OneWay}"
+                                 TextChanged="TextBoxServicePath_TextChanged"
+                                 >
+                        </TextBox>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="#2D3030" Grid.Column="1" Width="60"
+                                Click="BtnServicePath_Click"
+                                >
+                            <materialDesign:PackIcon Kind="DotsHorizontal"  Width="25" Height="25"/>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+            <Grid Margin="30 30 30 0">
+                <materialDesign:Card Padding="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox FontSize="17" IsReadOnly="True" materialDesign:HintAssist.Hint="엑셀 파일" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="560"
+                                 Text="{Binding excelPath, UpdateSourceTrigger=PropertyChanged}"
+                                 TextChanged="TextBoxExcelPath_TextChanged"
+                                 >
+                        </TextBox>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="#2D3030" Grid.Column="1" Width="60"
+                                Click="BtnExcelPath_Click"
+                                >
+                            <materialDesign:PackIcon Kind="DotsHorizontal"  Width="25" Height="25"/>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+            <Grid Margin="30 30 30 0">
+                <materialDesign:Card Padding="10">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBox FontSize="17" IsReadOnly="True" materialDesign:HintAssist.Hint="MP3 저장 폴더" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Width="560"
+                                 Text="{Binding soundPath, UpdateSourceTrigger=PropertyChanged}">
+                        </TextBox>
+                        <Button Style="{StaticResource MaterialDesignFlatButton}"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Foreground="#2D3030" Grid.Column="1" Width="60"
+                                Click="BtnSoundPath_Click"
+                                >
+                            <materialDesign:PackIcon Kind="DotsHorizontal"  Width="25" Height="25"/>
+                        </Button>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+            <Grid>
+                <materialDesign:Card Height="410" Margin="30">
+                    <StackPanel Margin="20">
+                        <TextBlock x:Name="TxtBlock_Category" FontSize="25" Text="{Binding Path=Category}"></TextBlock>
+                        <Separator Style="{StaticResource MaterialDesignLightSeparator}" Background="LightGray" />
+                        <ComboBox x:Name="ComboCountry" FontSize="17" materialDesign:HintAssist.Hint="Language" IsEditable="True" Margin="0 20 0 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding Path=countrys, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding Path=country, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="country"
+                                  SelectedValuePath="country" IsReadOnly="True"
+                                  SelectionChanged="ComboCountry_SelectionChanged"
+                                  >
+                        </ComboBox>
+                        <ComboBox x:Name="ComboVTypes" FontSize="17" materialDesign:HintAssist.Hint="Vocie type" IsEditable="True" Margin="0 20 0 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                  ItemsSource="{Binding Path=voiceTypes, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding Path=voiceType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="voiceType"
+                                  SelectedValuePath="voiceType" IsReadOnly="True"
+                                  SelectionChanged="ComboVTypes_SelectionChanged"
+                                  >
+                        </ComboBox>
+                        <ComboBox x:Name="ComboVNames" FontSize="17" materialDesign:HintAssist.Hint="Voice Name" IsEditable="True" Margin="0 20 0 0" Style="{StaticResource MaterialDesignFloatingHintComboBox}"
+                                   ItemsSource="{Binding Path=voiceNames, UpdateSourceTrigger=PropertyChanged}"
+                                  SelectedItem="{Binding Path=voiceName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                  DisplayMemberPath="voiceName"
+                                  SelectedValuePath="voiceName" IsReadOnly="True"
+                                  >
+                        </ComboBox>
+                        <Grid>
+                            <Label x:Name="LabelSpeed" VerticalAlignment="Center" Content="{Binding Path=SpeedString, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Foreground="DarkGray" Margin="0 0 0 5"></Label>
+                            <Slider x:Name="SliderSpeed" materialDesign:HintAssist.Hint="Speed" Style="{StaticResource MaterialDesignDiscreteHorizontalSlider}" Minimum="0.25" Maximum="4.0" Height="56"
+                                    TickFrequency="0.04" Value="{Binding Speed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        
+                            </Slider>
+                        </Grid>
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 20 0 0">
+
+                            <Button x:Name="btnPlay" Margin="5 0 205 0" Style="{StaticResource MaterialDesignFlatButton}" Background="{x:Null}" Foreground="Red"
+                                    Click="BtnPlay_Click" Height="50"
+                                    >
+                                <materialDesign:PackIcon Kind="PlayCircle"  Width="30" Height="30"></materialDesign:PackIcon>
+                            </Button>
+                            <TextBlock x:Name="TxtBox_Progress" Margin="0 0 10 0" Width="200" FontSize="20" VerticalAlignment="Center" TextAlignment="Center"
+                                       Text="{Binding Progress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                       >
+                                0 / 0
+                            </TextBlock>
+                            <Button x:Name="btnPrevPage" Margin="5 0 5 0" Style="{StaticResource MaterialDesignFlatButton}" Background="{x:Null}" Foreground="LightGray"
+                                    Click="BtnPrevPage_Click"
+                                    >
+                                <materialDesign:PackIcon Kind="ArrowLeftThick"  Width="30" Height="30"></materialDesign:PackIcon>
+                            </Button>
+                            <Button x:Name="btnNextPage" Style="{StaticResource MaterialDesignFlatButton}" Background="{x:Null}" Foreground="#2D3030"
+                                    Click="BtnNextPage_Click"
+                                    >
+                                <materialDesign:PackIcon Kind="ArrowRightThick" Width="30" Height="30"></materialDesign:PackIcon>
+                            </Button>
+                        </StackPanel>
+                    </StackPanel>
+                </materialDesign:Card>
+            </Grid>
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="30 0 30 0">
+                    <Button
+                        Style="{StaticResource MaterialDesignRaisedAccentButton}"
+                        Width="100"
+                        Content="변환"
+                        FontSize="20"
+                        Click="BtnTransform_Click"
+                        />
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</Window>
